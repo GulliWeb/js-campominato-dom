@@ -4,17 +4,18 @@ let counter = 0
 let bombsField = []
 let gameOver = false
 let btnPlay = document.getElementById('btn-play')
-// Al click del pulsante play genero 100 caselle
+
+// Funzione che al click del pulsante play inizia il gioco 
 function play() {
     if (gameOver) {
         location.reload()
     }
-    /* Richiamo funzione per stabilire il livello e quante celle devono stare su una riga */
+    // Richiamo funzione per stabilire il livello e quante celle devono stare su una riga 
     const levelCount = levels()
     bombsField = CasualNumb(levelCount)
 
     container.innerHTML = ""
-    /* Controllo per evitare che si crei un numero di celle ripetuto */
+    // Controllo per evitare che si crei un numero di celle ripetuto 
     if (container.querySelectorAll('.grid').length >= levels()) {
         alert('Campo minato già generato! per generarne uno nuovo la pagina verrà aggiornata!')
         location.reload()
@@ -23,7 +24,7 @@ function play() {
   
     for (let i = 1; i <= levels(); i++) {
         const grid = document.createElement('div')
-        /* Controllo per stabilire il numero di celle su una riga */
+        // Controllo per stabilire il numero di celle su una riga 
         if (levels() == 100) {
             grid.classList.add('grid-10','grid')
         } else if (levels() == 81) {
@@ -43,7 +44,7 @@ function play() {
     document.querySelector('footer').classList.add('d-visible')
 }
 
-// Al click di ogni cella stampiamo in console il numero di essa e coloriamola di azzurro
+// Funzione che al click di ogni cella stampiamo in console il numero di essa e coloriamola di azzurro
 function cellClick(grid, index) {
     if (gameOver) {
         return
@@ -57,6 +58,7 @@ function cellClick(grid, index) {
         counter++
     }
 
+    // Controllo se il giocatore non ha ancora raggiunto il punteggio massimo 
     if (!bomb(index, bombsField)) {
         let maxScore = counter - 16
         if (counter == maxScore) {
@@ -68,6 +70,7 @@ function cellClick(grid, index) {
         }
     }
 
+    // Controllo per stabilire se l'utente ha calpestato una bomba e quindi terminare il gioco
     if (bomb(index, bombsField)) {
         grid.classList.add('grid-bomb')
         counter--
@@ -75,7 +78,7 @@ function cellClick(grid, index) {
         gameOver = true
         btnPlay.innerText = 'Restart'
 
-        /* Aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato*/
+        // Richiamo funzione per aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato 
        setCursorNotAllowed()
     }
 
@@ -84,6 +87,7 @@ function cellClick(grid, index) {
     return(index)
 }
 
+// Funzione che determina il livello del gioco, e quindi a sua volta, il numero di celle
 function levels() {
     let level = document.getElementById('slc-dif')
     if (level.value == 1) {
@@ -110,18 +114,19 @@ function CasualNumb(max) {
     return(bombsField)
 }
 
-/* Funzione che verifica se ho cliccato su una bomba */
+// Funzione che verifica se ho cliccato su una bomba 
 function bomb(index, bombsField) {
    return bombsField.includes(index)
 }
 
+// Funzione che restarta il gioco
 function restartGame() {
     gameOver = false; 
     counter = 0; 
     play(); 
 }
 
- /* Aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato*/
+ // Funzione che aggiunge cursore not allowed su tutte le griglie una volta che il gioco è terminato
 function setCursorNotAllowed() {
      const allGrids = document.querySelectorAll('.grid')
      allGrids.forEach(grid => grid.style.cursor = 'not-allowed');
