@@ -1,11 +1,19 @@
 // Raccolta dati dal DOM
 const container = document.getElementById('grid-container')
 let counter = 0 
+let bombsField = []
+let gameOver = false
+let btnPlay = document.getElementById('btn-play')
 // Al click del pulsante play genero 100 caselle
 function play() {
+    if (gameOver) {
+        location.reload()
+    }
     /* Richiamo funzione per stabilire il livello e quante celle devono stare su una riga */
-    levels()
-    CasualNumb()
+    const levelCount = levels()
+    bombsField = CasualNumb(levelCount)
+
+    container.innerHTML = ""
     /* Controllo per evitare che si crei un numero di celle ripetuto */
     if (container.querySelectorAll('.grid').length >= levels()) {
         alert('Campo minato già generato! per generarne uno nuovo la pagina verrà aggiornata!')
@@ -37,6 +45,10 @@ function play() {
 
 // Al click di ogni cella stampiamo in console il numero di essa e coloriamola di azzurro
 function cellClick(grid, index) {
+    if (gameOver) {
+        return
+    }
+    
     let score = document.querySelector('h3')
     if (grid.classList.contains('azure-click')) {
         return
@@ -45,9 +57,18 @@ function cellClick(grid, index) {
         counter++
     }
 
-    console.log(index) 
-    console.log(counter)
+    if (bomb(index, bombsField)) {
+        grid.classList.add('grid-bomb')
+        counter--
+        alert('hai calpestato una BOMBA! partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti')
+        gameOver = true
+        btnPlay.innerText = 'Restart'
+        return
+    }
+
     score.innerText = `SCORE:${counter} `
+    console.log(index) 
+    return(index)
 }
 
 function levels() {
@@ -62,16 +83,27 @@ function levels() {
 }
 
 /* Funzione che genera 16 numeri casuali tra 1 e 16 non ripetuti fra loro */
-function CasualNumb() {
-    let max = 16
-    let randomNumbers = []
+function CasualNumb(max) {
+    let bombCount = 16
+    let bombsField = []
 
-    while (randomNumbers.length < 16) {
-        let rndNumber = Math.floor(Math.random() * max) + 1
-        if (!randomNumbers.includes(rndNumber)) {
-            randomNumbers.push(rndNumber)
+    while (bombsField.length < 16) {
+        let rndNumber = Math.floor(Math.random() * bombCount) + 1
+        if (!bombsField.includes(rndNumber)) {
+            bombsField.push(rndNumber)
         }
     }
-    console.log(randomNumbers)
-    return(randomNumbers)
+    console.log('Posizioni bombe: ' + bombsField)
+    return(bombsField)
+}
+
+/* Funzione che verifica se ho cliccato su una bomba */
+function bomb(index, bombsField) {
+   return bombsField.includes(index)
+}
+
+function restartGame() {
+    gameOver = false; 
+    counter = 0; 
+    play(); 
 }

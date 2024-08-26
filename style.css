@@ -224,6 +224,16 @@ h3{
     color: black;
 }
 
+.grid-bomb{
+    position: relative;
+    background-color: red;
+    color: white;
+    cursor: not-allowed;
+}
+
+.grid-bomb:hover{
+    cursor: not-allowed;
+}
 /* .click::after, .click::before{
     content: '';
     position: absolute;
