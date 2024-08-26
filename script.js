@@ -57,6 +57,17 @@ function cellClick(grid, index) {
         counter++
     }
 
+    if (!bomb(index, bombsField)) {
+        let maxScore = counter - 16
+        if (counter == maxScore) {
+            alert('Hai raggiunto il punteggio massimo! COMPLIMENTI HAI VINTO!')
+            gameOver = true
+            btnPlay.innerText = 'Restart'
+            setCursorNotAllowed()
+            return
+        }
+    }
+
     if (bomb(index, bombsField)) {
         grid.classList.add('grid-bomb')
         counter--
@@ -64,11 +75,8 @@ function cellClick(grid, index) {
         gameOver = true
         btnPlay.innerText = 'Restart'
 
-        let allgrids = document.querySelectorAll('.grid')
-        for (let i = 0; i < allgrids.length; i++) {
-            allgrids[i].style.cursor = 'not-allowed'
-        }
-        return
+        /* Aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato*/
+       setCursorNotAllowed()
     }
 
     score.innerText = `SCORE:${counter} `
@@ -111,4 +119,11 @@ function restartGame() {
     gameOver = false; 
     counter = 0; 
     play(); 
+}
+
+ /* Aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato*/
+function setCursorNotAllowed() {
+     const allGrids = document.querySelectorAll('.grid')
+     allGrids.forEach(grid => grid.style.cursor = 'not-allowed');
+     return
 }
