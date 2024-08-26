@@ -1,5 +1,6 @@
 // Raccolta dati dal DOM
 const container = document.getElementById('grid-container')
+let counter = 0 
 // Al click del pulsante play genero 100 caselle
 function play() {
     /* Richiamo funzione per stabilire il livello e quante celle devono stare su una riga */
@@ -35,12 +36,17 @@ function play() {
 
 // Al click di ogni cella stampiamo in console il numero di essa e coloriamola di azzurro
 function cellClick(grid, index) {
+    let score = document.querySelector('h3')
     if (grid.classList.contains('azure-click')) {
-        grid.classList.remove('azure-click', 'click')
+        return
     } else {
         grid.classList.add('azure-click', 'click') 
+        counter++
     }
+
     console.log(index) 
+    console.log(counter)
+    score.innerText = `SCORE:${counter} `
 }
 
 function levels() {
