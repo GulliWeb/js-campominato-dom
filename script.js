@@ -5,6 +5,7 @@ let counter = 0
 function play() {
     /* Richiamo funzione per stabilire il livello e quante celle devono stare su una riga */
     levels()
+    CasualNumb()
     /* Controllo per evitare che si crei un numero di celle ripetuto */
     if (container.querySelectorAll('.grid').length >= levels()) {
         alert('Campo minato già generato! per generarne uno nuovo la pagina verrà aggiornata!')
@@ -58,4 +59,19 @@ function levels() {
     } else if (level.value == 3)
         level  = 49
     return level
+}
+
+/* Funzione che genera 16 numeri casuali tra 1 e 16 non ripetuti fra loro */
+function CasualNumb() {
+    let max = 16
+    let randomNumbers = []
+
+    while (randomNumbers.length < 16) {
+        let rndNumber = Math.floor(Math.random() * max) + 1
+        if (!randomNumbers.includes(rndNumber)) {
+            randomNumbers.push(rndNumber)
+        }
+    }
+    console.log(randomNumbers)
+    return(randomNumbers)
 }
