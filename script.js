@@ -48,7 +48,7 @@ function cellClick(grid, index) {
     if (gameOver) {
         return
     }
-    
+
     let score = document.querySelector('h3')
     if (grid.classList.contains('azure-click')) {
         return
@@ -63,6 +63,11 @@ function cellClick(grid, index) {
         alert('hai calpestato una BOMBA! partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti')
         gameOver = true
         btnPlay.innerText = 'Restart'
+
+        let allgrids = document.querySelectorAll('.grid')
+        for (let i = 0; i < allgrids.length; i++) {
+            allgrids[i].style.cursor = 'not-allowed'
+        }
         return
     }
 
