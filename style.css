@@ -13,6 +13,7 @@
     display: flex;
 }
 
+/* Generics */
 body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
@@ -64,7 +65,7 @@ nav, footer{
     align-items: center;  
 }
 
-/* Right nav */
+/* Nav right */
 .right{
     margin-right: 10px;
 }
@@ -109,6 +110,7 @@ footer > *{
     color: white;
 }
 
+/* Background-gradient */
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -151,6 +153,7 @@ h3{
     line-height: 50px;
     text-align: center;
     position: relative;
+    border-radius: 12px;
 }
 
 .grid-10{
@@ -173,10 +176,10 @@ h3{
 }
 
 .grid:active{
-    color: blue;
+    color: #C850C0;
 }
 
-/* Click dynamic JS class */
+/* Dynamic class JS */
 .azure-click{
     background-color: azure;
     color: black;
@@ -197,6 +200,7 @@ h3{
     background-image: url(img/bomb.webp);
     background-position: center;
     background-size: cover;
+    background-color: red;
     text-shadow: 0 0 3px #fff;
 }
 
