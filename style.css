@@ -176,48 +176,6 @@ h3{
     color: blue;
 }
 
-/* 
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-
-.grid::after, .grid::before{
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: conic-gradient(from var(--angle), transparent 70%, white);
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    padding: 3px;
-    border-radius: 10px;
-    animation: 3S spin linear infinite;
-}
-
-.grid::before{
-    filter: blur(1.5rem);
-    opacity: 0.5;
-}
-
-@keyframes spin{
-    from{
-        --angle: 0deg
-    }
-    to{
-        --angle: 360deg
-    }
-} */
-
 /* Click dynamic JS class */
 .azure-click{
     background-color: azure;
@@ -235,24 +193,16 @@ h3{
     cursor: not-allowed;
 }
 
+.grid-hglts{
+    background-image: url(img/bomb.webp);
+    background-position: center;
+    background-size: cover;
+    text-shadow: 0 0 3px #fff;
+}
+
 .res-mess{
     text-align: center;
     font-size: 18px;
     color: white;
     text-shadow: 0 0 2px #fff;
 }
-/* .click::after, .click::before{
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: conic-gradient(from var(--angle), transparent 70%, blue);
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    padding: 3px;
-    border-radius: 10px;
-    animation: 3S spin linear infinite;
-}
- */

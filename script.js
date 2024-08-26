@@ -15,13 +15,6 @@ function play() {
     bombsField = CasualNumb(levelCount)
 
     container.innerHTML = ""
-    // Controllo per evitare che si crei un numero di celle ripetuto 
-    if (container.querySelectorAll('.grid').length >= levels()) {
-        alert('Campo minato già generato! per generarne uno nuovo la pagina verrà aggiornata!')
-        location.reload()
-        return
-    }
-  
     for (let i = 1; i <= levels(); i++) {
         const grid = document.createElement('div')
         // Controllo per stabilire il numero di celle su una riga 
@@ -73,7 +66,7 @@ function cellClick(grid, index) {
 
     // Controllo per stabilire se l'utente ha calpestato una bomba e quindi terminare il gioco
     if (bomb(index, bombsField)) {
-        grid.classList.add('grid-bomb')
+        grid.classList.add('grid-bomb', 'grid-hglts')
         counter--
         let mess = document.getElementById('result-message')
         mess.innerText = 'Hai calpestato una BOMBA, partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti'
