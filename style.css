@@ -234,6 +234,12 @@ h3{
 .grid-bomb:hover{
     cursor: not-allowed;
 }
+
+.res-mess{
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 2px #fff;
+}
 /* .click::after, .click::before{
     content: '';
     position: absolute;

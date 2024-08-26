@@ -62,7 +62,7 @@ function cellClick(grid, index) {
     if (!bomb(index, bombsField)) {
         let maxScore = counter - 16
         if (counter == maxScore) {
-            alert('Hai raggiunto il punteggio massimo! COMPLIMENTI HAI VINTO!')
+            alert('Hai raggiunto il punteggio massimo, COMPLIMENTI HAI VINTO!')
             gameOver = true
             btnPlay.innerText = 'Restart'
             setCursorNotAllowed()
@@ -74,7 +74,8 @@ function cellClick(grid, index) {
     if (bomb(index, bombsField)) {
         grid.classList.add('grid-bomb')
         counter--
-        alert('hai calpestato una BOMBA! partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti')
+        let mess = document.getElementById('result-message')
+        mess.innerText = 'hai calpestato una BOMBA, partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti'
         gameOver = true
         btnPlay.innerText = 'Restart'
 
