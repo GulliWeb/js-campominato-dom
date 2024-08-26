@@ -33,6 +33,7 @@ function play() {
             grid.classList.add('grid-7', 'grid')
             
         }
+
         grid.classList.add('grid')
         grid.innerText = i
         container.appendChild(grid)
@@ -60,7 +61,7 @@ function cellClick(grid, index) {
 
     // Controllo se il giocatore non ha ancora raggiunto il punteggio massimo 
     if (!bomb(index, bombsField)) {
-        let maxScore = counter - 16
+        let maxScore = levels() - bombsField.length
         if (counter == maxScore) {
             alert('Hai raggiunto il punteggio massimo, COMPLIMENTI HAI VINTO!')
             gameOver = true
@@ -75,10 +76,17 @@ function cellClick(grid, index) {
         grid.classList.add('grid-bomb')
         counter--
         let mess = document.getElementById('result-message')
-        mess.innerText = 'hai calpestato una BOMBA, partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti'
+        mess.innerText = 'Hai calpestato una BOMBA, partita TERMINATA! il tuo punteggio finale è di: ' + counter + ' Punti'
+       
+        let allGrids = document.querySelectorAll('.grid')
+        for (let i = 0; i < allGrids.length; i++) {
+            if (bomb(i + 1, bombsField)) {
+                allGrids[i].style.backgroundColor = 'red' 
+            }
+        }
+        
         gameOver = true
         btnPlay.innerText = 'Restart'
-
         // Richiamo funzione per aggiunta cursore not allowed su tutte le griglie una volta che il gioco è terminato 
        setCursorNotAllowed()
     }
@@ -106,13 +114,15 @@ function CasualNumb(max) {
     let bombsField = []
 
     while (bombsField.length < 16) {
-        let rndNumber = Math.floor(Math.random() * bombCount) + 1
+        let rndNumber = Math.floor(Math.random() * max) + 1
         if (!bombsField.includes(rndNumber)) {
             bombsField.push(rndNumber)
         }
     }
+    
     console.log('Posizioni bombe: ' + bombsField)
     return(bombsField)
+
 }
 
 // Funzione che verifica se ho cliccato su una bomba 
